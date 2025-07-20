@@ -1,0 +1,100 @@
+import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import { Button } from "../ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { TabsContent } from "../ui/tabs";
+import type {
+  CheckoutFormSchema,
+  PaymentSchema,
+} from "@/schemas/CheckoutFormSchema";
+
+interface PaymentTabFormProps {
+  errors: FieldErrors<PaymentSchema>;
+  register: UseFormRegister<CheckoutFormSchema>;
+  isSubmitting: boolean;
+}
+
+export const PaymentTabForm = ({
+  errors,
+  register,
+  isSubmitting,
+}: PaymentTabFormProps) => {
+  return (
+    <TabsContent value="payment">
+      <Card>
+        <CardHeader>
+          <CardTitle>Payment</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-2">
+          <div className="grid gap-1.5">
+            <Label htmlFor="cardName">Card Name</Label>
+            <Input
+              {...register("payment.cardName")}
+              id="cardName"
+              placeholder="Enter the name on your card"
+            />
+            {errors?.cardName && (
+              <p className="block text-xs font-medium leading-6 text-red-400 dark:text-red-300">
+                {errors.cardName.message}
+              </p>
+            )}
+          </div>
+
+          <div className="grid gap-1.5">
+            <Label htmlFor="cardNumber">Card Number</Label>
+            <Input
+              {...register("payment.cardNumber")}
+              id="cardNumber"
+              placeholder="Enter your card number"
+            />
+            {errors?.cardNumber && (
+              <p className="block text-xs font-medium leading-6 text-red-400 dark:text-red-300">
+                {errors.cardNumber.message}
+              </p>
+            )}
+          </div>
+
+          <div className="grid gap-1.5">
+            <Label htmlFor="cvv">CVV</Label>
+            <Input
+              {...register("payment.cvv")}
+              id="cvv"
+              placeholder="Enter your card CVV"
+            />
+            {errors?.cvv && (
+              <p className="block text-xs font-medium leading-6 text-red-400 dark:text-red-300">
+                {errors.cvv.message}
+              </p>
+            )}
+          </div>
+
+          <div className="grid gap-1.5">
+            <Label htmlFor="cardType">Card Type</Label>
+            <Input
+              {...register("payment.cardType")}
+              id="cardType"
+              placeholder="Enter your card type (e.g., Visa, MasterCard)"
+            />
+            {errors?.cardType && (
+              <p className="block text-xs font-medium leading-6 text-red-400 dark:text-red-300">
+                {errors.cardType.message}
+              </p>
+            )}
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button className="ml-auto" type="submit" disabled={isSubmitting}>
+            Submit
+          </Button>
+        </CardFooter>
+      </Card>
+    </TabsContent>
+  );
+};
