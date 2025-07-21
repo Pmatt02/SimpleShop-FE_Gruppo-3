@@ -21,6 +21,7 @@ export const CheckoutForm = () => {
   const navigate = useNavigate();
 
   const {
+    control,
     register,
     setError,
     handleSubmit,
@@ -85,6 +86,7 @@ export const CheckoutForm = () => {
             errors={errors.payment as FieldErrors<PaymentSchema>}
             register={register}
             isSubmitting={isSubmitting || isSubmitSuccessful}
+            control={control}
           />
         </Tabs>
       </form>

@@ -1,4 +1,9 @@
-import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldErrors,
+  type UseFormRegister,
+} from "react-hook-form";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -14,17 +19,26 @@ import type {
   CheckoutFormSchema,
   PaymentSchema,
 } from "@/schemas/CheckoutFormSchema";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 interface PaymentTabFormProps {
   errors: FieldErrors<PaymentSchema>;
   register: UseFormRegister<CheckoutFormSchema>;
   isSubmitting: boolean;
+  control: Control<CheckoutFormSchema>;
 }
 
 export const PaymentTabForm = ({
   errors,
   register,
   isSubmitting,
+  control,
 }: PaymentTabFormProps) => {
   return (
     <TabsContent value="payment">
@@ -77,10 +91,21 @@ export const PaymentTabForm = ({
 
           <div className="grid gap-1.5">
             <Label htmlFor="cardType">Card Type</Label>
-            <Input
-              {...register("payment.cardType")}
-              id="cardType"
-              placeholder="Enter your card type (e.g., Visa, MasterCard)"
+            <Controller
+              name="payment.cardType"
+              control={control}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select payment method" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="credit">Credit Card</SelectItem>
+                    <SelectItem value="paypal">PayPal</SelectItem>
+                    <SelectItem value="apple">Apple Pay</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
             />
             {errors?.cardType && (
               <p className="block text-xs font-medium leading-6 text-red-400 dark:text-red-300">

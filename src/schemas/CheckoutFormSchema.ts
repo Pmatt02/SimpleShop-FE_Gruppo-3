@@ -1,5 +1,5 @@
 import { z } from "zod";
-
+const cards = ["paypal", "apple", "credit"] as const;
 export const checkoutFormSchema = z.object({
   personalInfo: z.object({
     firstName: z.string().trim().min(1, "First name is required"),
@@ -25,17 +25,21 @@ export const checkoutFormSchema = z.object({
       .string()
       .min(13, "Invalid card number. It must be at least 13 characters")
       .max(19, "Invalid card number. It must be at most 19 characters"),
-    cvv: z.string().min(3, "Invalid cvv").max(4, "invalid cvv"),
-    cardType: z.string().trim().min(1, "Card type is required")
+    cvv: z
+      .string()
+      .regex(/^\d+$/, "Must contain only digits")
+      .min(3, "Invalid CVV")
+      .max(4, "Invalid CVV"),
+    cardType: z.enum(cards, "Card is required"),
   }),
 });
 export type CheckoutFormSchema = z.infer<typeof checkoutFormSchema>;
 
 export const personalInfoSchema = checkoutFormSchema.shape.personalInfo;
-export type PersonalInfoSchema = CheckoutFormSchema['personalInfo']
+export type PersonalInfoSchema = CheckoutFormSchema["personalInfo"];
 
 export const shippingAddressSchema = checkoutFormSchema.shape.shippingAddress;
-export type ShippingAddressSchema = CheckoutFormSchema['shippingAddress']
+export type ShippingAddressSchema = CheckoutFormSchema["shippingAddress"];
 
 export const paymentSchema = checkoutFormSchema.shape.payment;
-export type PaymentSchema = CheckoutFormSchema['payment']
+export type PaymentSchema = CheckoutFormSchema["payment"];
