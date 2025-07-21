@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { type Product } from '../types/product';
 import { type CartItem } from '../types/cart';
+type AddRedduce = 'add' | 'reduce' // tipo per permettere ad addToCart() sia di aggiungere che di rimuovere
+
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, option:AddRedduce) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
 }
@@ -23,16 +25,28 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product: Product) => {
+
+  const addToCart = (product: Product, option:AddRedduce) => {
     setCart((prevCart) => {
       const existing = prevCart.find((item) => item.id === product.id);
-      if (existing) {
-        return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+      if(option === "reduce"){
+        if (existing) {
+          return prevCart.map((item) =>
+            item.id === product.id ? { ...item, quantity: item.quantity===1? item.quantity - 0:item.quantity -1 } : item
+          );
+        } else {
+          return [...prevCart, { ...product, quantity: 1 }];
+        }
+      }else{
+        if (existing) {
+          return prevCart.map((item) =>
+            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+        } else {
+          return [...prevCart, { ...product, quantity: 1 }];
+        }
       }
+
     });
   };
 

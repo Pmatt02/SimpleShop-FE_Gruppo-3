@@ -1,6 +1,7 @@
 import { useFetchProducts } from '../hooks/useFetchProducts';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 
 export const Homepage = () => {
   const { products, loading, error } = useFetchProducts();
@@ -12,6 +13,7 @@ export const Homepage = () => {
 
   return (
     <div className="p-6">
+      <Link to={'/cart'}> vai al carrello</Link>
       <h1 className="text-2xl font-bold mb-6">Catalogo Prodotti</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => {
