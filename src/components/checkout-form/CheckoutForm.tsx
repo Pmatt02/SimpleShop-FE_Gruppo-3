@@ -12,21 +12,46 @@ import { useState } from "react";
 import { InfoTabForm } from "./InfoTabForm";
 import { ShipmentTabForm } from "./ShipmentTabForm";
 import { PaymentTabForm } from "./PaymentTabForm";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { showCheckoutToast } from "@/utils/checkoutToast";
 
 export const CheckoutForm = () => {
   const [tab, setTab] = useState("info");
+  const navigate = useNavigate();
+
   const {
     register,
+    setError,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<CheckoutFormSchema>({
     resolver: zodResolver(checkoutFormSchema),
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
-  const onSubmit = (data: CheckoutFormSchema) => {
+  const onSubmit = async (data: CheckoutFormSchema) => {
     // clear cart in localStorage and redirect to "/"
+    const promise = () =>
+      new Promise<void>((resolve) => setTimeout(() => resolve(), 2000));
+
+    const showToast = async () => {
+      toast.loading("Placing your order...");
+      try {
+        await promise();
+        toast.dismiss();
+        showCheckoutToast(() => navigate("/"));
+      } catch (err) {
+        toast.dismiss(); // dismiss loading
+        toast.error("Something went wrong. Please try again.");
+        setError("root", {
+          type: "manual",
+          message: "Checkout failed",
+        });
+      }
+    };
+    await showToast();
     console.log(data);
   };
   return (
@@ -59,7 +84,7 @@ export const CheckoutForm = () => {
           <PaymentTabForm
             errors={errors.payment as FieldErrors<PaymentSchema>}
             register={register}
-            isSubmitting={isSubmitting}
+            isSubmitting={isSubmitting || isSubmitSuccessful}
           />
         </Tabs>
       </form>
