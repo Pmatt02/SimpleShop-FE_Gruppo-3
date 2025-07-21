@@ -1,4 +1,5 @@
 import { CheckoutForm } from "@/components/checkout-form/CheckoutForm"
+import { Toaster } from "@/components/ui/sonner"
 
 export const CheckoutPage = () => {
 
@@ -9,6 +10,7 @@ export const CheckoutPage = () => {
                 // add Navbar component
             }
             <CheckoutForm/>
+            <Toaster position="top-center"/>
         </main>
     )
 }
