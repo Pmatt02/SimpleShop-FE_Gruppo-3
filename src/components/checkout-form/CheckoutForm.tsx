@@ -14,12 +14,13 @@ import { ShipmentTabForm } from "./ShipmentTabForm";
 import { PaymentTabForm } from "./PaymentTabForm";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { showCheckoutToast } from "@/utils/checkoutToast";
+import { showCheckoutToast } from "@/components/checkout-form/checkoutToast";
+import { useCart } from "@/context/CartContext";
 
 export const CheckoutForm = () => {
   const [tab, setTab] = useState("info");
   const navigate = useNavigate();
-
+  const { clearCart } = useCart();
   const {
     control,
     register,
@@ -33,7 +34,6 @@ export const CheckoutForm = () => {
   });
 
   const onSubmit = async (data: CheckoutFormSchema) => {
-    // clear cart in localStorage and redirect to "/"
     const promise = () =>
       new Promise<void>((resolve) => setTimeout(() => resolve(), 2000));
 
@@ -44,7 +44,7 @@ export const CheckoutForm = () => {
         toast.dismiss();
         showCheckoutToast(() => navigate("/"));
       } catch (err) {
-        toast.dismiss(); // dismiss loading
+        toast.dismiss();
         toast.error("Something went wrong. Please try again.");
         setError("root", {
           type: "manual",
@@ -53,6 +53,9 @@ export const CheckoutForm = () => {
       }
     };
     await showToast();
+    if (errors.root) return;
+
+    clearCart();
     console.log(data);
   };
   return (
@@ -85,7 +88,7 @@ export const CheckoutForm = () => {
           <PaymentTabForm
             errors={errors.payment as FieldErrors<PaymentSchema>}
             register={register}
-            isSubmitting={isSubmitting || isSubmitSuccessful}
+            submitStatus={isSubmitting || isSubmitSuccessful}
             control={control}
           />
         </Tabs>

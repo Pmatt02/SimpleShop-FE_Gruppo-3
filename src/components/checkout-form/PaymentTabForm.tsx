@@ -27,17 +27,19 @@ import {
   SelectValue,
 } from "../ui/select";
 
+
+
 interface PaymentTabFormProps {
   errors: FieldErrors<PaymentSchema>;
   register: UseFormRegister<CheckoutFormSchema>;
-  isSubmitting: boolean;
+  submitStatus: boolean;
   control: Control<CheckoutFormSchema>;
 }
 
 export const PaymentTabForm = ({
   errors,
   register,
-  isSubmitting,
+  submitStatus,
   control,
 }: PaymentTabFormProps) => {
   return (
@@ -115,7 +117,7 @@ export const PaymentTabForm = ({
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="ml-auto" type="submit" disabled={isSubmitting}>
+          <Button className="ml-auto" type="submit" disabled={submitStatus}>
             Submit
           </Button>
         </CardFooter>
