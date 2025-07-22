@@ -1,18 +1,29 @@
-// src/components/ProductCard.tsx
-import { type Product } from '../types/product';
+
+import  { type Product } from '../types/product';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   product: Product;
   onAddToCart: (product: Product) => void;
 }
 
+
+
+
 export const ProductCard = ({ product, onAddToCart }: Props) => {
+
+  const navigate = useNavigate()
+
+  const detail = (product:Product)=>{
+    navigate(`/product/${product.id}`) 
+  }
   return (
     <div className="bg-white rounded-lg shadow p-4 flex flex-col justify-between h-full">
       <div>
         <img
           src={product.image}
           alt={product.title}
+          onClick={()=>detail(product)}
           className="h-40 w-full object-contain mb-4"
         />
         <h2 className="text-sm font-semibold mb-2 line-clamp-2 h-10">{product.title}</h2>

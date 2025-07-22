@@ -6,6 +6,7 @@ import { Navbar } from '@/components/Navbar';
 import { useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
+
 export const Homepage = () => {
   const { products, loading, error } = useFetchProducts();
   const { addToCart } = useCart();
@@ -14,6 +15,7 @@ export const Homepage = () => {
   const { category } = useParams(); 
   const [searchParams] = useSearchParams();
   const search = searchParams.get('search')?.toLowerCase();
+
 
   if (loading) return <div className="text-center mt-10">Caricamento...</div>;
   if (error) return <div className="text-center mt-10 text-red-500">{error}</div>;
