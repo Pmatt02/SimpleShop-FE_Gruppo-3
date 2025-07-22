@@ -46,13 +46,6 @@ export const Navbar = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            
-            {/* Search Button */}
-            <button className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200 group">
-              <svg className="w-5 h-5 text-gray-600 group-hover:text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
 
             {/* Cart */}
             <Link to="/cart" className="group relative">
@@ -78,10 +71,6 @@ export const Navbar = () => {
 
                 <span className="font-medium hidden sm:block">
                   Carrello
-                </span>
-                
-                <span className="font-medium sm:hidden">
-                  {totalItems || '0'}
                 </span>
               </div>
             </Link>
