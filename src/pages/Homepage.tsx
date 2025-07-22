@@ -3,10 +3,12 @@ import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
+
 export const Homepage = () => {
   const { products, loading, error } = useFetchProducts();
   const { addToCart } = useCart();
 
+  
   
   if (loading) return <div className="text-center mt-10">Caricamento...</div>;
   if (error) return <div className="text-center mt-10 text-red-500">{error}</div>;
