@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import type { Product } from "@/types/product";
 import { ProductUI } from "@/components/product";
+import { Link } from "react-router-dom";
+import { Navbar } from "@/components/Navbar";
 
 
 export function ProductPage(){
@@ -22,11 +24,25 @@ export function ProductPage(){
         };
         fetchData();
     }, []);
+
+
+    const NotFound = <div className="w-full flex justify-center-safe">
+            <div className="flex-wrap p-20">
+              <h2 className="font-extrabold text-3xl text-black">
+                Prodotto non trovato
+              </h2>
+              <p>
+                Vai alla <Link to={"/"} className="underline decoration-sky-500">Home</Link> e vedi i nostri prodotti
+              </p>
+            </div>
+          </div>
     
     return(
         <>
+        <Navbar/>
             <div className="mx-3">
-                <ProductUI product={data}/>
+                {data?<ProductUI product={data}/>:NotFound}
+                
             </div>
            
         </>

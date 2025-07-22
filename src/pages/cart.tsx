@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { Link } from "react-router-dom";
 import { Resoconto } from "@/components/Resoconto";
+import { Navbar } from "@/components/Navbar";
 
 export function Cart() {
   const { cart } = useCart();
@@ -18,7 +19,7 @@ export function Cart() {
         return products.map((p, index) => <CartCard key={index} product={p} />);
       } else {
         return (
-          <div className="w-full sm:max-w-sm sm:mx-auto  sticky top-[20px]">
+          <div className="w-full sm:max-w-sm sm:mx-auto  sticky top-[80px]">
             <Resoconto products={cart} />
           </div>
         );
@@ -26,9 +27,9 @@ export function Cart() {
     } else {
       if (option === "card") {
         return (
-          <div className="w-full flex justify-center-safe">
+          <div className=" w-full flex justify-center-safe">
             <div className="flex-wrap p-20">
-              <h2 className="font-extrabold text-3xl text-red-900">
+              <h2 className="font-extrabold text-3xl text-black">
                 Il carrello è vuoto
               </h2>
               <p>
@@ -49,11 +50,15 @@ export function Cart() {
   }, [cart]);
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-start gap-8 p-6">
-      <div className="w-full lg:w-2/3 space-y-4 top-[20px] ">
-        {emptyOrNot(products, "card")}
+    <>
+      <Navbar/>
+      <div className="flex flex-col lg:flex-row justify-center items-start gap-8 p-6">
+        <div className="w-full  lg:w-2/3 space-y-4 top-[20px] ">
+          {emptyOrNot(products, "card")}
+        </div>
+        {emptyOrNot(products, "table")} 
       </div>
-      {emptyOrNot(products, "table")}
-    </div>
+    </>
+
   );
 }

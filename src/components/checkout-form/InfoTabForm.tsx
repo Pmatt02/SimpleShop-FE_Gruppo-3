@@ -82,7 +82,7 @@ export const InfoTabForm = ({ errors, register, setTab }: InfoTabFormProps) => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => setTab("shipment")}>Next</Button>
+          <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => setTab("shipment")}>Next</Button>
         </CardFooter>
       </Card>
     </TabsContent>

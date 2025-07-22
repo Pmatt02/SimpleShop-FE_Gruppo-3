@@ -113,7 +113,7 @@ export const ShipmentTabForm = ({
           </div>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => setTab("payment")}>Next</Button>
+          <Button className="bg-blue-500 hover:bg-blue-600" onClick={() => setTab("payment")}>Next</Button>
         </CardFooter>
       </Card>
     </TabsContent>

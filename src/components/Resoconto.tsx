@@ -8,10 +8,10 @@ export function Resoconto({ products }: { products: CartItem[] }) {
   const total = products.reduce((acc, p) => acc + p.price * p.quantity, 0);
   
   return (
-    <div className="border border-black rounded-md w-full max-w-sm p-4">
+    <div className="bg-white rounded-lg shadow w-full sm:max-w-sm p-4 ">
       <Table className="w-full">
         <TableCaption className="mb-2">
-          <Button onClick={() => navigate("/checkout")} className="w-full">Prosegui al checkout</Button>
+          <Button onClick={() => navigate("/checkout")} className="w-full bg-blue-500 hover:bg-blue-600">Prosegui al checkout</Button>
         </TableCaption>
         <TableHeader>
           <TableRow>
@@ -19,13 +19,17 @@ export function Resoconto({ products }: { products: CartItem[] }) {
             <TableHead className="text-right">Prezzo Tot</TableHead>
           </TableRow>
         </TableHeader>
+        
         <TableBody>
-          {products.map((p, index) => (
-            <TableRow key={index}>
-              <TableCell>{setString(p.title)}</TableCell>
-              <TableCell className="text-right">€{(p.price * p.quantity).toFixed(2)}</TableCell>
-            </TableRow>
-          ))}
+          <div className="max-h-[220px] overflow-y-scroll p-0 w-full">
+            {products.map((p, index) => (
+              <TableRow key={index}>
+                <TableCell>{setString(p.title)}</TableCell>
+                <TableCell className="text-right">€{(p.price * p.quantity).toFixed(2)}</TableCell>
+              </TableRow>
+            ))}
+          </div>
+          
         </TableBody>
         <TableFooter>
           <TableRow>
