@@ -21,15 +21,12 @@ export function Resoconto({ products }: { products: CartItem[] }) {
         </TableHeader>
         
         <TableBody>
-          <div className="max-h-[220px] overflow-y-scroll p-0 w-full">
-            {products.map((p, index) => (
-              <TableRow key={index}>
-                <TableCell>{setString(p.title)}</TableCell>
-                <TableCell className="text-right">€{(p.price * p.quantity).toFixed(2)}</TableCell>
-              </TableRow>
-            ))}
-          </div>
-          
+          {products.map((p, index) => (
+            <TableRow key={index}>
+              <TableCell>{setString(p.title)}</TableCell>
+              <TableCell className="text-right">€{(p.price * p.quantity).toFixed(2)}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
         <TableFooter>
           <TableRow>
