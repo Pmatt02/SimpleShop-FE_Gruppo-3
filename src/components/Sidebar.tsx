@@ -98,10 +98,10 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
                 
                 return (
                   <Link 
-                    key={cat} 
-                    to={`/category/${cat}`}
-                    className="block"
-                    onClick={() => window.innerWidth < 1024 && onToggle()}
+                     key={cat} 
+                      to={`/?category=${encodeURIComponent(cat)}`}
+                     className="block"
+                      onClick={() => window.innerWidth < 1024 && onToggle()}
                   >
                     <div className={`
                       px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3
