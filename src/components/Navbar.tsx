@@ -36,10 +36,10 @@ export const Navbar = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-                Simple Shop
+                Simple 
               </span>
               <span className="text-xs text-gray-500 -mt-1">
-                Premium Store
+                Shop
               </span>
             </div>
           </Link>
