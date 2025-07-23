@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useCart } from "@/context/CartContext";
 
 
 
@@ -42,6 +43,7 @@ export const PaymentTabForm = ({
   submitStatus,
   control,
 }: PaymentTabFormProps) => {
+  const {cart} = useCart();
   return (
     <TabsContent value="payment">
       <Card>
@@ -117,7 +119,7 @@ export const PaymentTabForm = ({
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="ml-auto" type="submit" disabled={submitStatus}>
+          <Button className="ml-auto bg-blue-500 hover:bg-blue-600 disabled:bg-primary" type="submit" disabled={submitStatus || cart.length === 0}>
             Submit
           </Button>
         </CardFooter>
