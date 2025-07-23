@@ -9,6 +9,10 @@ type SidebarProps = {
 export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
   const { categories, loading } = useFetchCategories();
   const location = useLocation();
+  
+  // Estrai il parametro category dall'URL
+  const searchParams = new URLSearchParams(location.search);
+  const currentCategory = searchParams.get('category');
 
   if (loading) {
     return (
@@ -54,7 +58,7 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
         {isOpen && (
           <button
             onClick={onToggle}
-            className="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors duration-200 hover:cursor-pointer"
+            className="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors duration-200"
           >
             <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -80,7 +84,7 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
               >
                 <div className={`
                   px-4 py-3 rounded-lg transition-colors duration-200 flex items-center gap-3
-                  ${location.pathname === '/' 
+                  ${location.pathname === '/' && !currentCategory
                     ? 'bg-blue-50 text-blue-700 border border-blue-200' 
                     : 'text-gray-700 hover:bg-gray-50'
                   }
@@ -94,7 +98,8 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
 
               {/* Categorie */}
               {categories.map((cat) => {
-                const isActive = location.pathname.includes(cat);
+                // Confronta la categoria corrente con quella nell'URL
+                const isActive = currentCategory === cat;
                 
                 return (
                   <Link 
@@ -132,13 +137,13 @@ type SidebarToggleProps = {
 };
 
 const SidebarToggle = ({ isOpen, onToggle }: SidebarToggleProps) => {
-  // Solo bottone hamburger quando sidebar è chiusa
+  // Solo bottone hamburger quando sidebar Ã¨ chiusa
   if (isOpen) return null;
   
   return (
     <button
       onClick={onToggle}
-      className="fixed top-20 left-4 z-40 w-10 h-10 rounded-lg transition-all duration-200 bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg hover:cursor-pointer"
+      className="fixed top-20 left-4 z-40 w-10 h-10 rounded-lg transition-all duration-200 bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg"
     >
       <svg className="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -154,7 +159,7 @@ type CategoryIconProps = {
 const CategoryIcon = ({ category }: CategoryIconProps) => {
   const iconClass = "w-5 h-5";
   
-  if (category.includes('electronic') || category.includes('tech')) {
+  if (category.includes('electronic')) {
     return (
       <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -162,7 +167,7 @@ const CategoryIcon = ({ category }: CategoryIconProps) => {
     );
   }
   
-  if (category.includes('cloth') || category.includes('fashion')) {
+  if (category.includes('cloth')) {
     return (
       <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -170,7 +175,7 @@ const CategoryIcon = ({ category }: CategoryIconProps) => {
     );
   }
 
-  if (category.includes('jewel') || category.includes('accessory')) {
+  if (category.includes('jewel')) {
     return (
       <svg className={iconClass} fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2l3.09 6.26L22 9l-5 4.87L18.18 22 12 18.77 5.82 22 7 13.87 2 9l6.91-.74L12 2z" />
