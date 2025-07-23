@@ -63,9 +63,24 @@ export const CheckoutForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="w-full">
-            <TabsTrigger value="info">Info</TabsTrigger>
-            <TabsTrigger value="shipment">Shipment</TabsTrigger>
-            <TabsTrigger value="payment">Payment</TabsTrigger>
+            <TabsTrigger
+              className={`${errors.personalInfo ? "text-red-500" : ""}`}
+              value="info"
+            >
+              Info
+            </TabsTrigger>
+            <TabsTrigger
+              className={`${errors.shippingAddress ? "text-red-500" : ""}`}
+              value="shipment"
+            >
+              Shipment
+            </TabsTrigger>
+            <TabsTrigger
+              className={`${errors.payment ? "text-red-500" : ""}`}
+              value="payment"
+            >
+              Payment
+            </TabsTrigger>
           </TabsList>
 
           {/* Info Tab */}
