@@ -11,15 +11,13 @@ export const Homepage = () => {
   const { products, loading, error } = useFetchProducts();
   const { addToCart } = useCart();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  //recupero paramestri dalla query string
+  //recupero parametri dalla query string
   const [searchParams] = useSearchParams();
-  const search = searchParams.get('search')?.toLowerCase();
   const category = searchParams.get('category');
   //filtro i prodotti per categoria e per ricerca
   const filteredProducts = products.filter((product) => {
   const matchesCategory = category ? product.category === category : true;
-  const matchesSearch = search ? product.title.toLowerCase().includes(search) : true;
-  return matchesCategory && matchesSearch;
+  return matchesCategory;
   });
 
 
