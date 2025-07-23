@@ -19,15 +19,19 @@ export function CartCard({ product }: { product: CartItem }) {
           src={product.image}
           alt={product.title}
           onClick={()=>{detail(product)}}
-          className="w-30 object-contain rounded"
+          className="w-30 object-contain rounded hover:cursor-pointer"
         />
       </div>
       <div className="sm:w-2/3 w-full flex flex-col justify-between space-y-8">
-        <p className="text-lg font-semibold">
-          {product.title} | €{product.price}
+        <p 
+        onClick={()=>{detail(product)}}
+        className="text-lg font-semibold ">
+          <span className="hover:text-blue-600 hover:cursor-pointer">{product.title}</span>
+          <br />
+          <span className="hover:text-blue-600 hover:cursor-pointer">€{product.price}</span>
         </p>
-        <div className="flex justify-between text-sm">
-          <span>Quantità: {product.quantity}</span>
+        <div className="flex justify-between text-sm font-bold">
+          <span>Quantità: {product.quantity}</span> 
           <span>
             Prezzo Totale: €{(product.price * product.quantity).toFixed(2)}
           </span>
@@ -36,19 +40,19 @@ export function CartCard({ product }: { product: CartItem }) {
         <div className="flex space-x-2">
           <Button
             onClick={() => addToCart(product, "add")}
-            className="px-3 py-1 w-9 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="w-9 align-middle bg-blue-500 text-white rounded hover:bg-blue-600 text-2xl hover:cursor-pointer"
           >
             +
           </Button>
           <Button
             onClick={() => addToCart(product, "reduce")}
-            className="px-3 py-1 w-9 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="w-9 align-middle bg-blue-500 text-white rounded hover:bg-blue-600 text-2xl hover:cursor-pointer"
           >
             -
           </Button>
           <Button
             onClick={() => removeFromCart(product.id)}
-            className="px-3 py-1 bg-red-700 text-white rounded hover:bg-red-600"
+            className="px-3 py-1 bg-red-700 text-white rounded hover:bg-red-600 hover:cursor-pointer"
           >
             Rimuovi
           </Button>

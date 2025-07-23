@@ -54,7 +54,7 @@ export const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
         {isOpen && (
           <button
             onClick={onToggle}
-            className="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors duration-200"
+            className="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-colors duration-200 hover:cursor-pointer"
           >
             <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -138,7 +138,7 @@ const SidebarToggle = ({ isOpen, onToggle }: SidebarToggleProps) => {
   return (
     <button
       onClick={onToggle}
-      className="fixed top-20 left-4 z-40 w-10 h-10 rounded-lg transition-all duration-200 bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg"
+      className="fixed top-20 left-4 z-40 w-10 h-10 rounded-lg transition-all duration-200 bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg hover:cursor-pointer"
     >
       <svg className="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />

@@ -28,7 +28,11 @@ export function ProductUI({product}:{product:Product}){
   <div className="md:w-1/2 h-96 w-full flex flex-col justify-start">
     
     <div className="bg-white rounded-lg shadow text-black p-4  border border-white mb-4">
-      <p className="text-xl font-semibold">{product?.title} | €{product?.price}</p>
+      <p className="text-xl font-semibold">
+        <span>{product?.title}</span>  
+        <br />
+        <span className="text-blue-700 font-bold">€{product?.price}</span> 
+      </p>
     </div>
 
     
@@ -44,7 +48,7 @@ export function ProductUI({product}:{product:Product}){
     
     <button 
     onClick={()=>add(product)}
-    className="bg-blue-500 text-white font-semibold hover:bg-blue-600 py-2 px-4 rounded-xl transition duration-300">
+    className="bg-blue-500 text-white font-semibold hover:bg-blue-600 py-2 px-4 rounded-xl transition duration-300 hover:cursor-pointer">
       Aggiungi al carrello
     </button>
   </div>
