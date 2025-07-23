@@ -5,14 +5,14 @@ import { useCart } from "@/context/CartContext";
 import { Link } from "react-router-dom";
 import { Resoconto } from "@/components/Resoconto";
 import { Navbar } from "@/components/Navbar";
-
+import { useRef } from "react";
 export function Cart() {
   const { cart } = useCart();
   const cartData = localStorage.getItem("cart");
   const [products, setProducts] = useState<CartItem[]>(
     cartData ? JSON.parse(cartData) : []
   );
-
+  
   const emptyOrNot = (products: CartItem[], option: "card" | "table") => {
     if (products.length) {
       if (option === "card") {
@@ -47,6 +47,7 @@ export function Cart() {
   };
   useEffect(() => {
     setProducts(cart);
+    
   }, [cart]);
 
   return (

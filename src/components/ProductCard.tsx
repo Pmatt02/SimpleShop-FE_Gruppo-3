@@ -24,7 +24,7 @@ export const ProductCard = ({ product, onAddToCart }: Props) => {
           src={product.image}
           alt={product.title}
           onClick={()=>detail(product)}
-          className="h-40 w-full object-contain mb-4"
+          className="h-40 w-full object-contain mb-4 hover:cursor-pointer"
         />
         <h2 className="text-sm font-semibold mb-2 line-clamp-2 h-10">{product.title}</h2>
         <p className="text-sm text-gray-500 mb-2">
@@ -34,7 +34,7 @@ export const ProductCard = ({ product, onAddToCart }: Props) => {
       </div>
       <button
         onClick={() => onAddToCart(product)}
-        className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600"
+        className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 hover:cursor-pointer"
       >
         Aggiungi al carrello
       </button>
